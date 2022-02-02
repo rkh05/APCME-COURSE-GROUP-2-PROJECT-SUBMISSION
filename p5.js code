@@ -1,0 +1,70 @@
+var host = '192.168.1.74:81';  // Change this to your CockroachBot IP Address
+var socket; // the websocket
+var ledValue = 0; // the sensor value
+
+function setup() {
+  createCanvas(400, 400);
+ 
+ 
+  button = createButton('ROADRAGE');
+  button.position(180, 200);
+  button.mousePressed(ROADRAGE);
+ 
+ 
+  button = createButton('CALM');
+  button.position(300, 200);
+  button.mousePressed(CALM);
+ 
+
+
+ 
+ 
+
+ 
+ 
+  // connect to server:
+  socket = new WebSocket('ws://' + host);
+  // socket connection listener:
+  socket.onopen = sendIntro;
+  // socket message listener:
+  socket.onmessage = readMessage;
+}
+
+function draw() {
+  if (ledValue == 1) {
+    background("#2307AF");
+  }
+  else {
+    background("#c30000");
+  }
+  text("CockroachBot WebSocket Server", 10, 20);
+  fill(255);
+ 
+ 
+}
+
+
+
+function ROADRAGE() {
+  socket.send("ROADRAGE");
+}
+
+function CALM() {
+  socket.send("CALM");
+}
+
+
+function sendIntro() {
+  // convert the message object to a string and send it:
+  socket.send("toggle");
+}
+
+function readMessage(event) {
+  var msg = event.data; // read data from the onmessage event
+  if (event.data == "LED=1"){
+    ledValue = 1;
+  }
+  else if (event.data == "LED=0"){
+    ledValue = 0;
+  }
+}
