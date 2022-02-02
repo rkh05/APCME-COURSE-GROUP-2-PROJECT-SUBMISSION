@@ -54,8 +54,8 @@ byte attinySlaveRcvArray[3];
 byte attinySlaveArrayBoard[3];
 
 // Replace with your network credentials
-const char* ssid = "arasu2";
-const char* password = "hemalatha";
+const char* ssid = "xxxx";
+const char* password = "xxxx";
 
 bool ledState = 0;
 
@@ -594,7 +594,15 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
               webSocket.broadcastTXT(ledState? "LED=1": "LED=0");
             }
 
-           
+            else if (strcmp((char*)payload, "STOP") == 0) {
+              setMotorRunning (LOW);
+              ledState = !ledState;
+              webSocket.broadcastTXT(ledState? "LED=1": "LED=0");
+              if (strcmp((char*)payload, "ROADRAGE")==0);
+                break;
+              if (strcmp((char*)payload, "CALM")==0);
+                break;
+            }
 
             break;
         case WStype_BIN:
@@ -655,6 +663,7 @@ void setup(){
 }
 void loop() {
   webSocket.loop();
+  calmBus();
   server.handleClient();
   digitalWrite(LED, ledState);
   delay(2);//allow the cpu to switch to other tasks
