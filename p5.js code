@@ -1,4 +1,4 @@
-var host = '192.168.1.74:81';  // Change this to your CockroachBot IP Address
+var host = '192.168.xx.xx:81';  // Change this to your CockroachBot IP Address
 var socket; // the websocket
 var ledValue = 0; // the sensor value
 
