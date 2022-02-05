@@ -54,8 +54,8 @@ byte attinySlaveRcvArray[3];
 byte attinySlaveArrayBoard[3];
 
 // Replace with your network credentials
-const char* ssid = "SINGTEL-6B88";
-const char* password = "eeguideiph";
+const char* ssid = "xxxx";
+const char* password = "xxxx";
 
 bool ledState = 0;
 
