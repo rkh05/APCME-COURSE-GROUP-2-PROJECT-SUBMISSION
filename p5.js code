@@ -15,6 +15,9 @@ function setup() {
   button.position(300, 200);
   button.mousePressed(CALM);
  
+  button = createButton('STOP');
+  button.position(100, 200);
+  button.mousePressed(STOP);
 
 
  
@@ -53,6 +56,9 @@ function CALM() {
   socket.send("CALM");
 }
 
+function STOP() {
+  socket.send("STOP");
+}
 
 function sendIntro() {
   // convert the message object to a string and send it:
